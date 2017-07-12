@@ -1,11 +1,12 @@
 require 'bunny'
+
+msg_size = Integer(ARGV[0])
+msg = Random.new.bytes(msg_size)
+
 b = Bunny.new.start
 ch = b.create_channel
-1.times do |i|
-  q = ch.queue("lazy_#{i}", durable: true)
-               # arguments: { 'x-queue-mode' => 'lazy' })
-  puts q.name
-  16384.times do
-    q.publish 'aaaa'
-  end
+q = ch.queue("lazy_#{msg_size}", durable: true)
+puts q.name
+4096.times do
+  q.publish msg
 end
