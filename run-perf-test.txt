@@ -1,3 +1,1 @@
-mvn -q exec:java -Dexec.classpathScope=test -Dexec.mainClass=com.rabbitmq.examples.PerfTest -Dexec.args='--predeclared --time 10 --exchange fanout-1 --consumers 0 --size 1024'
-
-for ((i = 0; i < 10; i++));do echo fanout-$i;mvn -q exec:java -Dexec.classpathScope=test -Dexec.mainClass=com.rabbitmq.examples.PerfTest -Dexec.args="--predeclared --time 10 --exchange fanout-$i --consumers 0 --size 1024" > "$HOME/Projects/issues/rabbitmq/server/gh-1291/output/perf-run-1291-$i.out" & done; wait
+for ((i = 0; i < 10; i++));do echo fanout-$i;mvn -q exec:java -Dexec.classpathScope=test -Dexec.mainClass=com.rabbitmq.examples.PerfTest -Dexec.args="--predeclared --time 10 --exchange fanout-$i --consumers 0 --size 512 --flag persistent" > "$HOME/Projects/issues/rabbitmq/server/gh-1284/output/master-run-1/$i.out" & done; wait
